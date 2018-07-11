@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 import { weatherConditions } from '../utils/WeatherConditions';
 
-const Weather = ({ weather, temperature }) => {
+
+const Weather = ({ weather, temperature,handleNew }) => {
   return (
     <View
+    onTouchEnd={()=>{
+      handleNew()
+    }}
       style={[
         styles.weatherContainer,
         { backgroundColor: weatherConditions[weather].color }
@@ -14,7 +18,7 @@ const Weather = ({ weather, temperature }) => {
     >
       <View style={styles.headerContainer}>
         <MaterialCommunityIcons
-          size={72}
+          size={52}
           name={weatherConditions[weather].icon}
           color={'#fff'}
         />
@@ -66,4 +70,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Weather;
+export default Weather

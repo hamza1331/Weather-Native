@@ -18,7 +18,16 @@ export default class App extends React.Component {
     country:''
   };
 
-
+  handleNew(){
+    this.setState({
+      isLoading: true,
+      temperature: 0,
+      weatherCondition: null,
+      error: null,
+      city:'',
+      country:''
+    })
+  }
   fetchWeahter() {
     if(this.state.city&&this.state.country){
       fetch(
@@ -36,7 +45,7 @@ export default class App extends React.Component {
         });
     }
   }
-
+  
   render() {
     const { isLoading, weatherCondition, temperature } = this.state;
     return (
@@ -70,7 +79,7 @@ export default class App extends React.Component {
             />
           </View>
         ) : (
-          <Weather weather={weatherCondition} temperature={temperature} />
+          <Weather handleNew={this.handleNew.bind(this)} weather={weatherCondition} temperature={temperature} />
         )}
        
       </View>
